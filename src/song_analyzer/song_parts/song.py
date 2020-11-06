@@ -2,6 +2,7 @@ from .sentence import Sentence
 import ntpath
 import os
 
+
 class Song:
     """ a Class representing a song's structure """
 
@@ -27,9 +28,7 @@ class Song:
         """
         filename = os.path.splitext(ntpath.basename(self.path))[0]
         filename_splitted = filename.split('-')
-        return {'name' : filename_splitted[1],
-                'artist': filename_splitted[0]
-                }
+        return dict(name=filename_splitted[1], artist=filename_splitted[0])
 
     def get_sentences(self) -> list[Sentence]:
         """
