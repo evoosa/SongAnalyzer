@@ -1,5 +1,6 @@
 from .sentence import Sentence
-
+import ntpath
+import os
 
 class Song:
     """ a Class representing a song's structure """
@@ -7,8 +8,8 @@ class Song:
     def __init__(self, song_path: str):
         self.path = song_path
         self.lyrics = self.get_lyrics_from_song_file()
+        self.metadata = self.get_song_metadata()
         # self.sentences = self.get_sentences()
-        # self.metadata = self.get_song_metadata()
 
     def get_lyrics_from_song_file(self) -> str: # TODO - change the name of this function
         """
@@ -20,10 +21,15 @@ class Song:
 
     def get_song_metadata(self) -> dict:
         """
-        Extract the song's metadata, such as the artist's name and song's name
+        Extract the song's metadata from it's filename,
+        such as the artist's name and song's name
         :return: song's metadata
         """
-        pass
+        filename = os.path.splitext(ntpath.basename(self.path))[0]
+        filename_splitted = filename.split('-')
+        return {'name' : filename_splitted[1],
+                'artist': filename_splitted[0]
+                }
 
     def get_sentences(self) -> list[Sentence]:
         """
