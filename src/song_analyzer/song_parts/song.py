@@ -43,7 +43,9 @@ class Song:
 
     def get_words_pos(self):
         """ Get each word's part of speech """
-        pass
+        for sentence in self.sentences:
+            for word in sentence.words:
+                word.get_pos()
 
     def count_nouns(self) -> int:
         """
