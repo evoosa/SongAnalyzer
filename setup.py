@@ -10,3 +10,6 @@ setup(
     author_email='',
     description='feed it with lyrics and get some valuable data about it'
 )
+
+# python -m textblob.download_corpora
+# textblob 0.15.3

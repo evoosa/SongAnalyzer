@@ -46,38 +46,3 @@ class Song:
         for sentence in self.sentences:
             for word in sentence.words:
                 word.get_pos()
-
-    def __count_words_with_pos_tags(self, pos_tags: list) -> int:
-        """
-        Count the number of words in the song with one of the given POS tags
-        :return: number of words with POS tags
-        """
-        count = 0
-        for sentence in self.sentences:
-            for word in sentence.words:
-                if word.pos in pos_tags:
-                    count += 1
-        return count
-
-    def get_nouns_to_adjectives_ratio(self) -> float:
-        """
-        Calculate the ratio between the number of nouns to the number of adjectives.
-        :return: the ratio of nouns/adjectives
-        """
-        nouns_count = self.__count_words_with_pos_tags(['NN', 'NNS', 'NNP', 'NNPS'])
-        adjective_count = self.__count_words_with_pos_tags(['JJ', 'JJR', 'JJS'])
-        return nouns_count/adjective_count # FIXME - should i leagel???????????????????????????????????????????????????????????
-
-    def get_sentence_length_stats(self) -> dict[str, int]:
-        """
-        Get statistics about the min/max/average length of the sentences in the song
-        :return: sentences statistics
-        """
-        pass
-
-    def get_word_length_stats(self) -> dict[str, int]:
-        """
-        Get statistics about the min/max/average length of the words in the song
-        :return: words statistics
-        """
-        pass
