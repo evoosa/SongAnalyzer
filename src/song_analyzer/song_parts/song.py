@@ -7,15 +7,16 @@ class Song:
     def __init__(self, song_path: str):
         self.path = song_path
         self.lyrics = self.get_lyrics_from_song_file()
-        self.sentences = self.get_sentences()
-        self.metadata = self.get_song_metadata()
+        # self.sentences = self.get_sentences()
+        # self.metadata = self.get_song_metadata()
 
     def get_lyrics_from_song_file(self) -> str: # TODO - change the name of this function
         """
         Get the lyrics from the song's file
         :return: the song's lyrics
         """
-        pass
+        with open(self.path, 'r') as lyrics_file:
+            return lyrics_file.read()
 
     def get_song_metadata(self) -> dict:
         """
