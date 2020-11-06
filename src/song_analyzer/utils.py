@@ -40,7 +40,7 @@ def get_sentence_length_stats(song_obj) -> dict[str, int]:
     max_len = max(sentences_lengths)
     min_len = min(sentences_lengths)
     average_len = sum(sentences_lengths) / len(sentences_lengths)
-    return dict(max_len=max_len, min_len=min_len, average_len=average_len)
+    return dict(sentence_max_len=max_len, sentence_min_len=min_len, sentence_average_len=average_len)
 
 
 def get_word_length_stats(song_obj) -> dict[str, int]:
@@ -55,10 +55,7 @@ def get_word_length_stats(song_obj) -> dict[str, int]:
     max_len = max(words_lengths)
     min_len = min(words_lengths)
     average_len = sum(words_lengths) / len(words_lengths)
-    return dict(max_len=max_len, min_len=min_len, average_len=average_len)
+    return dict(word_max_len=max_len, word_min_len=min_len, word_average_len=average_len)
 
     # FIXME - should i set the nouns and adjectives, remove duplicates? should they be unique?
     # FIXME - should i leagel? (sentences/words avg, and noun/adjs ratio)
-    # FIXME - does it matter if ran on linux or windows?
-    # FIXME - does it have to be scripts? can i use funcs and a python script instead? ir in addition?
-        # THINK ABOUT IT FIRSTTTT

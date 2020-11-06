@@ -12,5 +12,5 @@ if __name__ == '__main__':
 
     # print the words statistics
     words_stats = get_word_length_stats(song_obj)
-    print('\n[ WORDs STATS ]\n')
+    print('\n[ WORDS STATS ]\n')
     [print('{0}: {1}'.format(stat[0], stat[1])) for stat in words_stats.items()]

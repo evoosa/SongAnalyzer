@@ -3,13 +3,12 @@ from distutils.core import setup
 setup(
     name='song_analyzer',
     version='1.0.0',
-    packages=[''],
+    packages=['song_analyzer'],
     url='',
-    license='',
+    install_requires=[
+        'textblob==0.15.3',
+        'textblob.download_corpora'
+    ],
     author='evoosa',
-    author_email='',
     description='feed it with lyrics and get some valuable data about it'
 )
-
-# python -m textblob.download_corpora
-# textblob 0.15.3
