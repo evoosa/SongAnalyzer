@@ -59,26 +59,14 @@ class Song:
                     count += 1
         return count
 
-    def _count_nouns(self) -> int:
-        """
-        Count the number of adjectives in the song
-        :return: number of adjectives
-        """
-        return self.__count_words_with_pos_tags(['NN', 'NNS', 'NNP', 'NNPS'])
-
-    def _count_adjectives(self) -> int:
-        """
-        Count the number of adjectives in the song
-        :return: number of adjectives
-        """
-        return self.__count_words_with_pos_tags(['JJ', 'JJR', 'JJS'])
-
     def get_nouns_to_adjectives_ratio(self) -> float:
         """
         Calculate the ratio between the number of nouns to the number of adjectives.
         :return: the ratio of nouns/adjectives
         """
-        pass
+        nouns_count = self.__count_words_with_pos_tags(['NN', 'NNS', 'NNP', 'NNPS'])
+        adjective_count = self.__count_words_with_pos_tags(['JJ', 'JJR', 'JJS'])
+        return nouns_count/adjective_count # FIXME - should i leagel???????????????????????????????????????????????????????????
 
     def get_sentence_length_stats(self) -> dict[str, int]:
         """
