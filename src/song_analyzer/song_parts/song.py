@@ -47,19 +47,32 @@ class Song:
             for word in sentence.words:
                 word.get_pos()
 
-    def count_nouns(self) -> int:
+    def __count_words_with_pos_tags(self, pos_tags: list) -> int: # TODO - rename
         """
-        Count the number of nouns in the song
-        :return: number of nouns
+        Count the number of words in the song with one of the given POS tags
+        :return: number of words with POS tags
         """
-        pass
+        count = 0
+        for sentence in self.sentences:
+            for word in sentence.words:
+                if word.pos in pos_tags:
+                    print(word.data, word.pos) ##############################
+                    count += 1
+        return count
 
-    def count_adjectives(self) -> int:
+    def _count_nouns(self) -> int:
         """
         Count the number of adjectives in the song
         :return: number of adjectives
         """
-        pass
+        return self.__count_words_with_pos_tags(['NN', 'NNS', 'NNP', 'NNPS'])
+
+    def _count_adjectives(self) -> int:
+        """
+        Count the number of adjectives in the song
+        :return: number of adjectives
+        """
+        return self.__count_words_with_pos_tags(['JJ', 'JJR', 'JJS'])
 
     def get_nouns_to_adjectives_ratio(self) -> float:
         """
