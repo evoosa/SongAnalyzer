@@ -1,4 +1,14 @@
 from song_analyzer.song_parts.song import Song
+import argparse
+
+
+def get_argument_parser(): # FIXME - add typesssss
+    """ Create the argument parser for the scripts """
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-p', '--song_path',
+                        type=str,
+                        help="song's path")
+    return parser
 
 
 def count_words_with_pos_tags(song_obj, pos_tags: list) -> int: # TODO - try to get rid of it????????
