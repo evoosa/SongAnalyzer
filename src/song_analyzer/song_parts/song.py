@@ -42,12 +42,12 @@ class Song:
         return sentences
 
     def get_words_pos(self):
-        """ Get each word's part of speech """
+        """ Get the part of speech for all the words in the song """
         for sentence in self.sentences:
             for word in sentence.words:
                 word.get_pos()
 
-    def __count_words_with_pos_tags(self, pos_tags: list) -> int: # TODO - rename
+    def __count_words_with_pos_tags(self, pos_tags: list) -> int:
         """
         Count the number of words in the song with one of the given POS tags
         :return: number of words with POS tags
@@ -56,7 +56,6 @@ class Song:
         for sentence in self.sentences:
             for word in sentence.words:
                 if word.pos in pos_tags:
-                    print(word.data, word.pos) ##############################
                     count += 1
         return count
 
