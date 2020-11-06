@@ -10,7 +10,7 @@ class Song:
         self.path = song_path
         self.lyrics = self.get_lyrics_from_song_file()
         self.metadata = self.get_song_metadata()
-        # self.sentences = self.get_sentences()
+        self.sentences = self.get_sentences()
 
     def get_lyrics_from_song_file(self) -> str: # TODO - change the name of this function
         """
@@ -18,7 +18,7 @@ class Song:
         :return: the song's lyrics
         """
         with open(self.path, 'r') as lyrics_file:
-            return lyrics_file.read()
+            return lyrics_file.readlines()
 
     def get_song_metadata(self) -> dict:
         """
@@ -35,7 +35,11 @@ class Song:
         Get the song's 'Sentence' objects
         :return: the song's Sentence objects
         """
-        pass
+        sentences = []
+        for sentence in self.lyrics:
+            sentence_obj = Sentence(sentence.replace('\n', ''))
+            sentences.append(sentence_obj)
+        return sentences
 
     def get_words_pos(self):
         """ Get each word's part of speech """
