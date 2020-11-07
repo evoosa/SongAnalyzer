@@ -1,8 +1,9 @@
 import os
-from song_analyzer.config import BASE_DIR, LYRICS_DIR, SCRIPT_OUTPUTS_DIR
+from song_analyzer.config import BASE_DIR, LYRICS_DIR, SCRIPT_OUTPUTS_DIR, CSV_COLUMNS
 from song_analyzer.song_parts.song import Song
 from song_analyzer.song_parts.artist import Artist
 from song_analyzer.utils.utils import get_song_pos_entities, get_song_length_stats
+import csv
 
 if __name__ == '__main__':  # TODO - verbosity!!
     lyrics_dir = os.path.join(BASE_DIR, LYRICS_DIR)
@@ -23,14 +24,19 @@ if __name__ == '__main__':  # TODO - verbosity!!
 
         if artist_name not in artist_objects.keys():
             artist_objects[artist_name] = Artist(artist_name)
+            # create general stats CSV file
+            with open(os.path.join(artist_output_dir, 'general_statistics.csv'), 'w', newline='',
+                      encoding='utf-8') as general_stats_file:
+                writer = csv.DictWriter(general_stats_file, fieldnames=CSV_COLUMNS)
+                writer.writeheader()
 
         artist_objects[artist_name].songs.append(song_obj)
 
         print('\n[[ {} ]]\n'.format(song_obj.metadata['name']))
-
+        # Write POS entities to txt file
         with open(os.path.join(artist_output_dir, 'pos_statistics.txt'), 'a') as pos_file:
             pos_entities = get_song_pos_entities(song_obj.path)
-            print('\n[ writing POS entities ]\n')
+            print('[ writing POS entities ]\n')
             pos_file.write('\n-- {} --\n'.format(song_obj.metadata['name']))
             pos_file.write('\n[ NOUNS ]\n')
             [pos_file.write(noun + '\n') for noun in set(pos_entities['nouns'])]
@@ -39,12 +45,10 @@ if __name__ == '__main__':  # TODO - verbosity!!
             pos_file.write('\nnoun/adjective ratio: {0} / {1} = {2}\n'.format(len(pos_entities['nouns']),
                                                                               len(pos_entities['adjectives']),
                                                                               pos_entities['noun_to_adjective_ratio']))
-
-        with open(os.path.join(artist_output_dir, 'general_statistics.csv'), 'a') as gen_stats_file:
-            print('\n[ writing length stats ]\n')
-            gen_stats_file('\n[ SENTENCE STATS ]\n')
-            [print('{0}: {1}'.format(stat[0], stat[1])) for stat in len_stats['sentence_stats'].items()]
-
-            print('\n[ WORDS STATS ]\n')
-            [print('{0}: {1}'.format(stat[0], stat[1])) for stat in len_stats['word_stats'].items()]
-
+        # Write General stats to CSV
+        with open(os.path.join(artist_output_dir, 'general_statistics.csv'), 'a', newline='',
+                  encoding='utf-8') as general_stats_file:
+            print('[ writing general stats ]\n')
+            len_stats = get_song_length_stats(song_obj.path)
+            writer = csv.DictWriter(general_stats_file, fieldnames=CSV_COLUMNS)
+            writer.writerow(len_stats)

@@ -5,7 +5,7 @@ def get_song_pos_entities(lyrics_path: str) -> dict:
     """
     Get POS entities data for a given song
     :param lyrics_path: path to the lyrics file
-    :return:
+    :return: POS entities for the song
     """
     song_obj = Song(lyrics_path)
     return dict(
@@ -14,11 +14,11 @@ def get_song_pos_entities(lyrics_path: str) -> dict:
         noun_to_adjective_ratio=song_obj.noun_to_adj_ratio
     )
 
-def get_length_stats(lyrics_path: str) -> dict[str, int]:
+def get_song_length_stats(lyrics_path: str) -> dict[str, int]:
     """
     Get statistics about the min/max/average length of the sentences and words in the song
     :param lyrics_path: path to the lyrics file
-    :return:
+    :return: length stats for the song
     """
     """
     ::
