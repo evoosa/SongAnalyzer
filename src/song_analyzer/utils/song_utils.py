@@ -1,32 +1,4 @@
-from song_analyzer.song_parts.song import Song
-import argparse
-
-
-def get_argument_parser(): # FIXME - add typesssss
-    """ Create the argument parser for the scripts """
-    parser = argparse.ArgumentParser()
-    parser.add_argument('-p', '--song_path',
-                        type=str,
-                        help="song's path")
-    return parser
-
-
-def count_words_with_pos_tags(song_obj, pos_tags: list) -> int: # TODO - try to get rid of it????????
-    """
-    Count the number of words in the song with one of the given POS tags
-    :param song_obj: Song object
-    :param pos_tags: POS tags to search songs with
-    :return: number of words with POS tags
-    """
-    count = 0
-    for sentence in song_obj.sentences:
-        for word in sentence.words:
-            if word.pos in pos_tags:
-                count += 1
-    return count
-
-
-def get_words_with_pos_tags(song_obj, pos_tags: list) -> set: # FIXME to set????????????
+def get_words_with_pos_tags(song_obj, pos_tags: list) -> list:
     """
     Get words with on of the given POS tags
     :param song_obj: Song object
@@ -38,7 +10,7 @@ def get_words_with_pos_tags(song_obj, pos_tags: list) -> set: # FIXME to set????
         for word in sentence.words:
             if word.pos in pos_tags:
                 words.append(word.data)
-    return set(words)
+    return words
 
 
 def get_sentence_length_stats(song_obj) -> dict[str, int]:

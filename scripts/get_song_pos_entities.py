@@ -1,5 +1,5 @@
 from song_analyzer.song_parts.song import Song
-from song_analyzer.utils import get_words_with_pos_tags, get_argument_parser
+from song_analyzer.utils.song_utils import get_words_with_pos_tags, get_argument_parser
 
 if __name__ == '__main__':
     song_path = r"C:\Users\evoosa\Desktop\JobShit\SongAnalyzer\lyrics\charlie_cunningham-force_of_habit.txt"
