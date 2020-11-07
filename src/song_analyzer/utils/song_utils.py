@@ -1,18 +1,3 @@
-def get_words_with_pos_tags(song_obj, pos_tags: list) -> list:
-    """
-    Get words with on of the given POS tags
-    :param song_obj: Song object
-    :param pos_tags: POS tags to search songs with
-    :return:
-    """
-    words = []
-    for sentence in song_obj.sentences:
-        for word in sentence.words:
-            if word.pos in pos_tags:
-                words.append(word.data)
-    return words
-
-
 def get_sentence_length_stats(song_obj) -> dict[str, int]:
     """
     Get statistics about the min/max/average length of the sentences in the song
