@@ -1,8 +1,9 @@
 from song_analyzer.song_parts.song import Song
+import sys
 
 if __name__ == '__main__':
-    song_path = r"C:\Users\User\Desktop\PS\SongAnalyzer\lyrics\charlie_cunningham-dont_go_far.txt"
-    song_obj = Song(song_path)
+    lyrics_path = sys.argv[1]
+    song_obj = Song(lyrics_path)
 
     # print all Nouns and Adjectives in the song
 
