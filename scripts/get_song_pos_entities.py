@@ -6,7 +6,7 @@ if __name__ == '__main__':
     song_pos_entities = get_song_pos_entities(lyrics_path)
     print('\n[ NOUNS ]\n')
     [print(noun) for noun in set(song_pos_entities['nouns'])]
-    #
+
     print('\n[ ADJECTIVES ]\n')
     [print(adjective) for adjective in set(song_pos_entities['adjectives'])]
 
