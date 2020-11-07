@@ -23,6 +23,3 @@ def get_word_length_stats(song_obj) -> dict[str, int]:
     min_len = min(words_lengths)
     average_len = sum(words_lengths) / len(words_lengths)
     return dict(word_max_len=max_len, word_min_len=min_len, word_average_len=average_len)
-
-    # FIXME - should i set the nouns and adjectives, remove duplicates? should they be unique?
-    # FIXME - should i leagel? (sentences/words avg, and noun/adjs ratio)

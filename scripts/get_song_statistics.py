@@ -1,5 +1,5 @@
 from song_analyzer.song_parts.song import Song
-from song_analyzer.utils.song_utils import get_sentence_length_stats, get_word_length_stats
+from song_analyzer.utils.song_stats_utils import get_sentence_length_stats, get_word_length_stats
 import sys
 
 if __name__ == '__main__':

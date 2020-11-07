@@ -1,17 +1,15 @@
-from song_analyzer.song_parts.song import Song
 import sys
+from song_analyzer.utils.utils import get_song_pos_entities
 
 if __name__ == '__main__':
     lyrics_path = sys.argv[1]
-    song_obj = Song(lyrics_path)
-
-    # print all Nouns and Adjectives in the song
-
+    song_pos_entities = get_song_pos_entities(lyrics_path)
     print('\n[ NOUNS ]\n')
-    [print(noun) for noun in song_obj.nouns]
-
+    [print(noun) for noun in set(song_pos_entities['nouns'])]
+    #
     print('\n[ ADJECTIVES ]\n')
-    [print(adjective) for adjective in song_obj.adjectives]
+    [print(adjective) for adjective in set(song_pos_entities['adjectives'])]
 
-    # calculate the ratio between the nouns and adjectives
-    print('\nnoun/adjective ratio: {0} / {1} = {2}\n'.format(len(song_obj.nouns), len(song_obj.adjectives), song_obj.noun_to_adj_ratio))
+    print('\nnoun/adjective ratio: {0} / {1} = {2}\n'.format(len(song_pos_entities['nouns']),
+                                                             len(song_pos_entities['adjectives']),
+                                                             song_pos_entities['noun_to_adjective_ratio']))

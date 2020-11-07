@@ -13,6 +13,7 @@ if __name__ == '__main__':  # TODO - verbosity!!
 
     artist_objects = {}
     for song_obj in song_objects:
+        # Get Artist object
         artist_name = song_obj.metadata['artist']
         artist_output_dir = os.path.join(BASE_DIR, SCRIPT_OUTPUTS_DIR, artist_name)
 
@@ -23,3 +24,6 @@ if __name__ == '__main__':  # TODO - verbosity!!
             artist_objects[artist_name] = Artist(artist_name)
 
         artist_objects[artist_name].songs.append(song_obj)
+
+        # Get POS entities for song
+
