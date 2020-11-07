@@ -10,7 +10,7 @@ def get_song_pos_entities(lyrics_path: str):
         'noun_to_adjective_ratio': song_obj.noun_to_adj_ratio
     }
 
-def get_song_length_statistics(lyrics_path: str):
+def get_song_length_stats(lyrics_path: str):
     song_obj = Song(lyrics_path)
     sentence_stats = get_sentence_length_stats(song_obj)
     words_stats = get_word_length_stats(song_obj)
