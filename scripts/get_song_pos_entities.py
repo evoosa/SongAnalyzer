@@ -1,7 +1,7 @@
 from song_analyzer.song_parts.song import Song
 
 if __name__ == '__main__':
-    song_path = r"C:\Users\evoosa\Desktop\JobShit\SongAnalyzer\lyrics\charlie_cunningham-force_of_habit.txt"
+    song_path = r"C:\Users\User\Desktop\PS\SongAnalyzer\lyrics\charlie_cunningham-dont_go_far.txt"
     song_obj = Song(song_path)
 
     # print all Nouns and Adjectives in the song

@@ -15,6 +15,3 @@ def get_histogram_plot_file(ratios: list, output_path: str):
     plt.ylabel('number of songs')
     plt.grid(axis='y', alpha=0.6)
     plt.savefig(output_path)
-
-ratios = [5.333333333333333, 10.285714285714286, 3.8461538461538463, 5.375, 9.333333333333334, 9.416666666666666, 6.05, 6.4375, 8.833333333333334, 14.333333333333334]
-get_histogram_plot_file(ratios, 'abc.png')
