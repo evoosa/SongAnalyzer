@@ -32,11 +32,11 @@ if __name__ == '__main__':  # TODO - verbosity!!
 
         artist_objects[artist_name].songs.append(song_obj)
 
-        print('\n[[ {} ]]\n'.format(song_obj.metadata['name']))
+        print('\n[[ {} ]]'.format(song_obj.metadata['name']))
         # Write POS entities to txt file
+        print('[ writing POS entities ]')
         with open(os.path.join(artist_output_dir, 'pos_statistics.txt'), 'a') as pos_file:
             pos_entities = get_song_pos_entities(song_obj.path)
-            print('[ writing POS entities ]\n')
             pos_file.write('\n-- {} --\n'.format(song_obj.metadata['name']))
             pos_file.write('\n[ NOUNS ]\n')
             [pos_file.write(noun + '\n') for noun in set(pos_entities['nouns'])]
@@ -46,9 +46,14 @@ if __name__ == '__main__':  # TODO - verbosity!!
                                                                               len(pos_entities['adjectives']),
                                                                               pos_entities['noun_to_adjective_ratio']))
         # Write General stats to CSV
+        print('[ writing general stats ]')
         with open(os.path.join(artist_output_dir, 'general_statistics.csv'), 'a', newline='',
                   encoding='utf-8') as general_stats_file:
-            print('[ writing general stats ]\n')
             len_stats = get_song_length_stats(song_obj.path)
             writer = csv.DictWriter(general_stats_file, fieldnames=CSV_COLUMNS)
             writer.writerow(len_stats)
+
+    # Create POS diagram for all artists
+    print('\n[[ Create POS diagram for all artists ]]')
+    [artist.get_noun_to_adj_ratio_hist_plot() for artist in artist_objects.values()]
+    print('[[ DONE ]]')

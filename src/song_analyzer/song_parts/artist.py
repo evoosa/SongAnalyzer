@@ -14,7 +14,7 @@ class Artist:
     def get_noun_to_adj_ratio_hist_plot(self):
         """  Create a histogram plot PNG file for the artist's noun/adjective ratios """
         artist_output_dir = os.path.join(BASE_DIR, SCRIPT_OUTPUTS_DIR, self.name)
-        output_file_path = os.path.join(artist_output_dir, "all_songs_hist_plot.png")
+        output_file_path = os.path.join(artist_output_dir, "hist_plot.png")
 
         if not os.path.exists(artist_output_dir):
             os.makedirs(artist_output_dir)
