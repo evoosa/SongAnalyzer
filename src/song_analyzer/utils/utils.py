@@ -1,22 +1,45 @@
 from song_analyzer.song_parts.song import Song
-from song_analyzer.utils.song_stats_utils import get_sentence_length_stats, get_word_length_stats
 
 
-def get_song_pos_entities(lyrics_path: str):
+def get_song_pos_entities(lyrics_path: str) -> dict:
+    """
+    Get POS entities data for a given song
+    :param lyrics_path: path to the lyrics file
+    :return:
+    """
     song_obj = Song(lyrics_path)
-    return {
-        'nouns': song_obj.nouns,
-        'adjectives': song_obj.adjectives,
-        'noun_to_adjective_ratio': song_obj.noun_to_adj_ratio
-    }
+    return dict(
+        nouns=song_obj.nouns,
+        adjectives=song_obj.adjectives,
+        noun_to_adjective_ratio=song_obj.noun_to_adj_ratio
+    )
 
-def get_song_length_stats(lyrics_path: str):
+def get_length_stats(lyrics_path: str) -> dict[str, int]:
+    """
+    Get statistics about the min/max/average length of the sentences and words in the song
+    :param lyrics_path: path to the lyrics file
+    :return:
+    """
+    """
+    ::
+    :return: sentences statistics
+    """
     song_obj = Song(lyrics_path)
-    sentence_stats = get_sentence_length_stats(song_obj)
-    words_stats = get_word_length_stats(song_obj)
-    return {
-        'sentence_stats': sentence_stats,
-        'word_stats': words_stats
-    }
+    sentences_lengths = [len(sentence.words) for sentence in song_obj.sentences]
+    sen_max_len = max(sentences_lengths)
+    sen_min_len = min(sentences_lengths)
+    sen_average_len = sum(sentences_lengths) / len(sentences_lengths)
 
-
+    words_lengths = []
+    for sentence in song_obj.sentences:
+        for word in sentence.words:
+            words_lengths.append(len(word.data))
+    word_max_len = max(words_lengths)
+    word_min_len = min(words_lengths)
+    word_average_len = sum(words_lengths) / len(words_lengths)
+    return dict(sentence_max_len=sen_max_len,
+                sentence_min_len=sen_min_len,
+                sentence_average_len=sen_average_len,
+                word_max_len=word_max_len,
+                word_min_len=word_min_len,
+                word_average_len=word_average_len)

@@ -28,9 +28,9 @@ if __name__ == '__main__':  # TODO - verbosity!!
 
         print('\n[[ {} ]]\n'.format(song_obj.metadata['name']))
 
-        print('\n[ writing POS entities ]\n')
-        pos_entities = get_song_pos_entities(song_obj.path)
         with open(os.path.join(artist_output_dir, 'pos_statistics.txt'), 'a') as pos_file:
+            pos_entities = get_song_pos_entities(song_obj.path)
+            print('\n[ writing POS entities ]\n')
             pos_file.write('\n-- {} --\n'.format(song_obj.metadata['name']))
             pos_file.write('\n[ NOUNS ]\n')
             [pos_file.write(noun + '\n') for noun in set(pos_entities['nouns'])]
@@ -39,3 +39,12 @@ if __name__ == '__main__':  # TODO - verbosity!!
             pos_file.write('\nnoun/adjective ratio: {0} / {1} = {2}\n'.format(len(pos_entities['nouns']),
                                                                               len(pos_entities['adjectives']),
                                                                               pos_entities['noun_to_adjective_ratio']))
+
+        with open(os.path.join(artist_output_dir, 'general_statistics.csv'), 'a') as gen_stats_file:
+            print('\n[ writing length stats ]\n')
+            gen_stats_file('\n[ SENTENCE STATS ]\n')
+            [print('{0}: {1}'.format(stat[0], stat[1])) for stat in len_stats['sentence_stats'].items()]
+
+            print('\n[ WORDS STATS ]\n')
+            [print('{0}: {1}'.format(stat[0], stat[1])) for stat in len_stats['word_stats'].items()]
+
