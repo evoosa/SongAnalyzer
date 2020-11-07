@@ -1,31 +1,20 @@
-import os
-from song_analyzer.song_parts.song import Song
 import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
 
 
+def get_histogram_plot_file(ratios: list, output_path: str):
+    """
+    Create a file containing a histogram plot for a given list of noun/adjective ratios
+    :param ratios: list of integers representing noun/adjective ratios
+    :param output_path: path to output the PNG to
+    """
+    pandas_series = pd.Series(ratios)
+    plt.hist(x=pandas_series, bins='auto', color='#0504aa', alpha=0.6, rwidth=0.8)
+    plt.title('noun/adjective ratio for {} song lyrics'.format(len(ratios)))
+    plt.xlabel('noun/adjective ratio')
+    plt.ylabel('number of songs')
+    plt.grid(axis='y', alpha=0.6)
+    plt.savefig(output_path)
 
-# TEST
-lyrics_dir = r"C:\Users\evoosa\Desktop\JobShit\SongAnalyzer\lyrics"
-lyrics_files = [os.path.join(lyrics_dir, f) for f in os.listdir(lyrics_dir)]
-
-song_objects = [Song(lyrics) for lyrics in lyrics_files]
-
-# for s in song_objects:
-#     for sen in s.sentences:
-#         for w in sen.words:
-#             print(w.data, w.pos)
-
-noun_adj_ratios = [song.noun_to_adj_ratio for song in song_objects]
-print(noun_adj_ratios)
-
-noun_adj_ratios_np = pd.Series(noun_adj_ratios)
-noun_adj_ratios_np.plot.hist(grid=True, bins='auto', rwidth=0.9,
-                   color='#607c8e')
-plt.title('Commute Times for 1,000 Commuters')
-plt.xlabel('noun/adjective ratio')
-plt.ylabel('number of songs')
-plt.grid(axis='y', alpha=0.75)
-
-# TODO - one for all artists, one for specific artists
+ratios = [5.333333333333333, 10.285714285714286, 3.8461538461538463, 5.375, 9.333333333333334, 9.416666666666666, 6.05, 6.4375, 8.833333333333334, 14.333333333333334]
+get_histogram_plot_file(ratios, 'abc.png')

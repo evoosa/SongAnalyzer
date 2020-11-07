@@ -15,7 +15,7 @@ class Song:
         self.adjectives = self.get_words_with_pos_tags(['JJ', 'JJR', 'JJS'])
         self.noun_to_adj_ratio = len(self.nouns) / len(self.adjectives)
 
-    def get_lyrics_from_song_file(self) -> list: # TODO - change the name of this function
+    def get_lyrics_from_song_file(self) -> list:
         """
         Get the lyrics from the song's file
         :return: the song's lyrics
