@@ -1,5 +1,7 @@
 import os
+from datetime import datetime
 
+NOW = datetime.now().strftime("%d-%m-%Y-%H-%M")
 BASE_DIR = r"/opt/song_analyzer"
 LYRICS_DIR = os.path.join(BASE_DIR, 'lyrics')
 LYRICS_FILE_PATHS = [os.path.join(LYRICS_DIR, path) for path in os.listdir(LYRICS_DIR)]
