@@ -19,26 +19,25 @@ def get_song_pos_entities(lyrics_path: str) -> dict:
     )
 
 
-def get_song_length_stats(lyrics_path: str) -> dict[str, int]:
+def get_song_length_stats(sentences: list) -> dict[str, int]:
     """
     Get statistics about the min/max/average length of the sentences and words in the song
-    :param lyrics_path: path to the lyrics file
+    :param sentences: list of sentences
     :return: length stats for the song
     """
     """
     ::
     :return: sentences statistics
     """
-    song_obj = Song(lyrics_path)
-    sentences_lengths = [len(sentence.words) for sentence in song_obj.sentences]
+    sentences_lengths = [len(sentence.words) for sentence in sentences]
     sen_max_len = max(sentences_lengths)
     sen_min_len = min(sentences_lengths)
     sen_average_len = sum(sentences_lengths) / len(sentences_lengths)
 
     words_lengths = []
-    for sentence in song_obj.sentences:
+    for sentence in sentences:
         for word in sentence.words:
-            words_lengths.append(len(word.data))
+            words_lengths.append(len(word))
     word_max_len = max(words_lengths)
     word_min_len = min(words_lengths)
     word_average_len = sum(words_lengths) / len(words_lengths)
