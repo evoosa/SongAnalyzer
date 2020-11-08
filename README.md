@@ -1,3 +1,5 @@
+# TODO - scripts output locations
+
 # SongAnalyzer
 * The SongAnalyzer package provides you scripts for analyzing song lyrics
 
@@ -22,9 +24,10 @@
         - a TXT file containing Part Of Speech data for each song (nouns, adjectives, noun/adjective ratio).
 
 # Requirements
-    - python 3.7
+    - python 3.7.9
     - Linux environment
     - run: python3 -m textblob.download_corpora
+    - in config.py, set the directory in which the
 
 # Installation
     - cd to src/

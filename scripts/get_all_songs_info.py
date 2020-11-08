@@ -1,7 +1,8 @@
+#!/usr/bin/python3
 import os
 
 from song_analyzer.config import SCRIPT_OUTPUTS_DIR, HISTOGRAM_PLOT_FILENAME, LYRICS_FILE_PATHS, GEN_STATS_FILENAME, \
-    POS_STATS_FILENAME, NOW
+    POS_STATS_FILENAME
 from song_analyzer.song_parts.song import Song
 from song_analyzer.utils.file_utils import create_dir_if_missing, create_gen_stats_csv, update_pos_stats_file, \
     update_gen_stats_file
@@ -24,12 +25,12 @@ if __name__ == '__main__':
 
         print('\n[[ {} ]]'.format(song_obj.metadata['name']))
         print('[ updating POS entities ]')
-        update_pos_stats_file(os.path.join(artist_output_dir, NOW + '_' + POS_STATS_FILENAME), song_obj)
+        update_pos_stats_file(os.path.join(artist_output_dir, POS_STATS_FILENAME), song_obj)
         print('[ updating general stats ]')
-        update_gen_stats_file(os.path.join(artist_output_dir, NOW + '_' + GEN_STATS_FILENAME), song_obj)
+        update_gen_stats_file(os.path.join(artist_output_dir, GEN_STATS_FILENAME), song_obj)
 
     print('\n[[ Create POS histograms for all artists ]]')
     for artist in artists.values():
-        plot_file_path = os.path.join(artist['output_dir'], NOW + '_' + HISTOGRAM_PLOT_FILENAME)
+        plot_file_path = os.path.join(artist['output_dir'], HISTOGRAM_PLOT_FILENAME)
         gen_hist_plot_from_songs(plot_file_path, artist['songs'])
     print('[[ DONE ]]')
