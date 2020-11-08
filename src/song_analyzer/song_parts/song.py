@@ -2,7 +2,7 @@ import ntpath
 import os
 
 from song_analyzer.utils.file_utils import get_lyrics_from_song_file
-from .sentence import Sentence
+from song_analyzer.song_parts.sentence import Sentence
 
 
 class Song:
@@ -11,10 +11,10 @@ class Song:
     def __init__(self, song_path: str):
         self.path = song_path
         self.lyrics = get_lyrics_from_song_file(self.path)
-        self.metadata = self.get_song_metadata()
+        self.metadata = self.get_metadata()
         self.sentences = self.get_sentences()
 
-    def get_song_metadata(self) -> dict:
+    def get_metadata(self) -> dict:
         """
         Extract the song's metadata from it's filename,
         such as the artist's name and song's name
@@ -27,11 +27,11 @@ class Song:
     def get_sentences(self) -> list[Sentence]:
         """
         Get the song's 'Sentence' objects
+        Remove ',' character from words
         :return: the song's Sentence objects
         """
         sentences = []
         for sentence in self.lyrics:
-            sentence_obj = Sentence(sentence.replace('\n', ''))
+            sentence_obj = Sentence(sentence.replace('\n', '').replace(',', ''))
             sentences.append(sentence_obj)
         return sentences
-

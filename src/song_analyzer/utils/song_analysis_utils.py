@@ -1,4 +1,6 @@
 from song_analyzer.song_parts.song import Song
+from textblob import TextBlob
+
 
 def get_song_pos_entities(lyrics_path: str) -> dict:
     """
@@ -48,16 +50,30 @@ def get_song_length_stats(lyrics_path: str) -> dict[str, int]:
                 word_average_len=word_average_len)
 
 
+def get_word_pos(word: str) -> str:
+    """
+    get the word's part of speech
+    currently, there is no support for short words, such as "we'll" or "you've"
+    :return: the word's POS, or an empty string if it's a shortened word
+    """
+    if "'" not in word:
+        print (TextBlob(word).tags[0])
+        return TextBlob(word).tags[0][1]
+    else:
+        return ''
+
+
 def get_words_with_pos_tags(sentences, pos_tags: list) -> list:
     """
     Get words with on of the given POS tags
-    :param self: Song object
+    :param sentences: song's sentences
     :param pos_tags: POS tags to search songs with
     :return:
     """
     words = []
     for sentence in sentences:
         for word in sentence.words:
-            if word.pos in pos_tags:
-                words.append(word.data)
+            word_pos = get_word_pos(word)
+            if word_pos in pos_tags:
+                words.append(word)
     return words
