@@ -3,7 +3,7 @@ import os
 
 from song_analyzer.config import SCRIPT_OUTPUTS_DIR, CSV_COLUMNS, HISTOGRAM_PLOT_FILENAME, LYRICS_FILE_PATHS
 from song_analyzer.song_parts.song import Song
-from song_analyzer.utils.file_utils import create_dir_if_missing
+from song_analyzer.utils.file_utils import create_dir_if_missing, create_csv_with_field_names, update_pos_stats_file
 from song_analyzer.utils.histogram_utils import generate_histogram_plot_file
 from song_analyzer.utils.song_analysis_utils import get_pos_entities_from_sentences, get_song_length_stats
 
@@ -24,26 +24,15 @@ if __name__ == '__main__':
                 'output_dir': artist_output_dir
             }
 
-            # create general stats CSV file
-            with open(os.path.join(artist_output_dir, 'general_statistics.csv'), 'w', newline='',
-                      encoding='utf-8') as general_stats_file:
-                writer = csv.DictWriter(general_stats_file, fieldnames=CSV_COLUMNS)
-                writer.writeheader()
+            create_csv_with_field_names(os.path.join(artist_output_dir, 'general_statistics.csv'), CSV_COLUMNS)
 
         artists[artist_name]['songs'].append(song_obj)
+
         print('\n[[ {} ]]'.format(song_obj.metadata['name']))
 
         print('[ writing POS entities ]')
-        with open(os.path.join(artist_output_dir, 'pos_statistics.txt'), 'a') as pos_file:
-            pos_entities = get_pos_entities_from_sentences(song_obj.sentences)
-            pos_file.write('\n-- {} --\n'.format(song_obj.metadata['name']))
-            pos_file.write('\n[ NOUNS ]\n')
-            [pos_file.write(noun + '\n') for noun in set(pos_entities['nouns'])]
-            pos_file.write('\n[ ADJECTIVES ]\n')
-            [pos_file.write(adjective + '\n') for adjective in set(pos_entities['adjectives'])]
-            pos_file.write('\nnoun/adjective ratio: {0} / {1} = {2}\n'.format(len(pos_entities['nouns']),
-                                                                              len(pos_entities['adjectives']),
-                                                                              pos_entities['noun_to_adjective_ratio']))
+        update_pos_stats_file(os.path.join(artist_output_dir, 'pos_statistics.txt'), song_obj)
+
         print('[ writing general stats ]')
         with open(os.path.join(artist_output_dir, 'general_statistics.csv'), 'a', newline='',
                   encoding='utf-8') as general_stats_file:

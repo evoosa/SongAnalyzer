@@ -22,8 +22,9 @@
         - a TXT file containing Part Of Speech data for each song (nouns, adjectives, noun/adjective ratio).
 
 # Requirements
-    - python 3.9
-    - Windows or Linux environment
+    - python 3.7
+    - Linux environment
+    - run: python3 -m textblob.download_corpora
 
 # Installation
     - cd to src/
