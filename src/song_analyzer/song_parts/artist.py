@@ -1,8 +1,6 @@
 from song_analyzer.utils.histogram_utils import get_histogram_plot_file
 from ..config import BASE_DIR, SCRIPT_OUTPUTS_DIR
 import os
-from datetime import datetime
-
 
 class Artist:
     """ a Class representing a musical artist """

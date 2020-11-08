@@ -1,6 +1,5 @@
 from song_analyzer.song_parts.song import Song
 
-
 def get_song_pos_entities(lyrics_path: str) -> dict:
     """
     Get POS entities data for a given song
@@ -8,11 +7,15 @@ def get_song_pos_entities(lyrics_path: str) -> dict:
     :return: POS entities for the song
     """
     song_obj = Song(lyrics_path)
+    nouns = get_words_with_pos_tags(song_obj.sentences, ['NN', 'NNS', 'NNP', 'NNPS'])
+    adjectives = get_words_with_pos_tags(song_obj.sentences, ['JJ', 'JJR', 'JJS'])
+    noun_to_adj_ratio = len(nouns) / len(adjectives)
     return dict(
-        nouns=song_obj.nouns,
-        adjectives=song_obj.adjectives,
-        noun_to_adjective_ratio=song_obj.noun_to_adj_ratio
+        nouns=nouns,
+        adjectives=adjectives,
+        noun_to_adjective_ratio=noun_to_adj_ratio
     )
+
 
 def get_song_length_stats(lyrics_path: str) -> dict[str, int]:
     """
@@ -43,3 +46,18 @@ def get_song_length_stats(lyrics_path: str) -> dict[str, int]:
                 word_max_len=word_max_len,
                 word_min_len=word_min_len,
                 word_average_len=word_average_len)
+
+
+def get_words_with_pos_tags(sentences, pos_tags: list) -> list:
+    """
+    Get words with on of the given POS tags
+    :param self: Song object
+    :param pos_tags: POS tags to search songs with
+    :return:
+    """
+    words = []
+    for sentence in sentences:
+        for word in sentence.words:
+            if word.pos in pos_tags:
+                words.append(word.data)
+    return words

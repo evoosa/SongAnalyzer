@@ -1,5 +1,5 @@
 import sys
-from song_analyzer.utils.utils import get_song_pos_entities
+from song_analyzer.utils.song_analysis_utils import get_song_pos_entities
 
 if __name__ == '__main__':
     lyrics_path = sys.argv[1]

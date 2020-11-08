@@ -2,7 +2,7 @@ import os
 from song_analyzer.config import BASE_DIR, LYRICS_DIR, SCRIPT_OUTPUTS_DIR, CSV_COLUMNS
 from song_analyzer.song_parts.song import Song
 from song_analyzer.song_parts.artist import Artist
-from song_analyzer.utils.utils import get_song_pos_entities, get_song_length_stats
+from song_analyzer.utils.song_analysis_utils import get_song_pos_entities, get_song_length_stats
 import csv
 
 if __name__ == '__main__':  # TODO - verbosity!!

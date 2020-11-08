@@ -1,6 +1,8 @@
-from .sentence import Sentence
 import ntpath
 import os
+
+from song_analyzer.utils.file_utils import get_lyrics_from_song_file
+from .sentence import Sentence
 
 
 class Song:
@@ -8,20 +10,9 @@ class Song:
 
     def __init__(self, song_path: str):
         self.path = song_path
-        self.lyrics = self.get_lyrics_from_song_file()
+        self.lyrics = get_lyrics_from_song_file(self.path)
         self.metadata = self.get_song_metadata()
         self.sentences = self.get_sentences()
-        self.nouns = self.get_words_with_pos_tags(['NN', 'NNS', 'NNP', 'NNPS'])
-        self.adjectives = self.get_words_with_pos_tags(['JJ', 'JJR', 'JJS'])
-        self.noun_to_adj_ratio = len(self.nouns) / len(self.adjectives)
-
-    def get_lyrics_from_song_file(self) -> list:
-        """
-        Get the lyrics from the song's file
-        :return: the song's lyrics
-        """
-        with open(self.path, 'r') as lyrics_file:
-            return lyrics_file.readlines()
 
     def get_song_metadata(self) -> dict:
         """
@@ -44,16 +35,3 @@ class Song:
             sentences.append(sentence_obj)
         return sentences
 
-    def get_words_with_pos_tags(self, pos_tags: list) -> list:
-        """
-        Get words with on of the given POS tags
-        :param self: Song object
-        :param pos_tags: POS tags to search songs with
-        :return:
-        """
-        words = []
-        for sentence in self.sentences:
-            for word in sentence.words:
-                if word.pos in pos_tags:
-                    words.append(word.data)
-        return words
