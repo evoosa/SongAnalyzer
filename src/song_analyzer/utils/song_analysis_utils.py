@@ -56,7 +56,6 @@ def get_word_pos(word: str) -> str:
     :return: the word's POS, or an empty string if it's a shortened word
     """
     if "'" not in word:
-        print (TextBlob(word).tags[0])
         return TextBlob(word).tags[0][1]
     else:
         return ''
