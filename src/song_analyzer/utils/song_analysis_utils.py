@@ -1,5 +1,4 @@
-from textblob import TextBlob
-
+import nltk
 
 def get_pos_entities_from_sentences(sentences: list) -> dict:
     """
@@ -51,7 +50,7 @@ def get_word_pos(word: str) -> str:
     :return: the word's POS, or an empty string if it's a shortened word
     """
     if "'" not in word:
-        return TextBlob(word).tags[0][1]
+        return nltk.pos_tag(nltk.word_tokenize(word))[0][1]
     else:
         return ''
 
