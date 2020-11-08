@@ -28,9 +28,9 @@
     - run: python3 -m textblob.download_corpora
 
 # Installation
-    - pip3 install song_analyzer/src/
-    OR
     - python3 setup.py develop
+    OR
+    - pip3 install song_analyzer/src/
 
 # Usage
     ./get_song_length_stats.py <lyrics_file_path>
