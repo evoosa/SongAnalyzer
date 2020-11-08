@@ -1,7 +1,8 @@
 import csv
 import os
 
-from song_analyzer.utils.song_analysis_utils import get_pos_entities_from_sentences
+from song_analyzer.config import CSV_COLUMNS
+from song_analyzer.utils.song_analysis_utils import get_pos_entities_from_sentences, get_song_length_stats
 
 
 def create_dir_if_missing(dir_path: str):
@@ -22,20 +23,19 @@ def get_lyrics_lines_from_song_file(path) -> list:
         return lyrics_file.readlines()
 
 
-def create_csv_with_field_names(csv_path: str, field_names: list):
+def create_gen_stats_csv(csv_path: str):
     """
-    Create a CSV file with the given field names
+    Create a CSV file with the general stats field names
     :param csv_path: path to CSV file
-    :param field_names: field names to add
     """
     with open(csv_path, 'w', newline='', encoding='utf-8') as general_stats_file:
-        writer = csv.DictWriter(general_stats_file, fieldnames=field_names)
+        writer = csv.DictWriter(general_stats_file, fieldnames=CSV_COLUMNS)
         writer.writeheader()
 
 
 def update_pos_stats_file(file_path: str, song_obj):
     """
-    update POS statisitics file with new POS entities data
+    Update POS statisitics file with new POS entities data
     if it's missing, it will be created
     :param file_path: path to the post statistics file
     :param song_obj: Song object
@@ -51,3 +51,15 @@ def update_pos_stats_file(file_path: str, song_obj):
         pos_file.write('\nnoun/adjective ratio: {0} / {1} = {2}\n'.format(len(pos_entities['nouns']),
                                                                           len(pos_entities['adjectives']),
                                                                           pos_entities['noun_to_adjective_ratio']))
+
+
+def update_general_stats_file(file_path: str, song_obj):
+    """
+    Update general statistics file with word/sentence length stats
+    :param file_path: path to the post statistics file
+    :param song_obj: Song object
+    """
+    with open(file_path, 'a', newline='', encoding='utf-8') as general_stats_file:
+        len_stats = get_song_length_stats(song_obj.sentences)
+        writer = csv.DictWriter(general_stats_file, fieldnames=CSV_COLUMNS)
+        writer.writerow(len_stats)
