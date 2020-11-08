@@ -24,7 +24,6 @@
 # Requirements
     - python 3.9
     - Windows or Linux environment
-    -
 
 # Installation
     - cd to src/
