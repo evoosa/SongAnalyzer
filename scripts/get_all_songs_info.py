@@ -1,23 +1,20 @@
 import csv
 import os
 
-from song_analyzer.config import BASE_DIR, LYRICS_DIR, SCRIPT_OUTPUTS_DIR, CSV_COLUMNS, HISTOGRAM_PLOT_FILENAME
+from song_analyzer.config import SCRIPT_OUTPUTS_DIR, CSV_COLUMNS, HISTOGRAM_PLOT_FILENAME, LYRICS_FILE_PATHS
 from song_analyzer.song_parts.song import Song
 from song_analyzer.utils.histogram_utils import generate_histogram_plot_file
 from song_analyzer.utils.song_analysis_utils import get_pos_entities_from_sentences, get_song_length_stats
 
 if __name__ == '__main__':
-    lyrics_dir = os.path.join(BASE_DIR, LYRICS_DIR)
-    output_dir = os.path.join(BASE_DIR, SCRIPT_OUTPUTS_DIR)
 
     print('\n[ Getting all songs info.. ]\n')
-    lyrics_files = [os.path.join(lyrics_dir, path) for path in os.listdir(lyrics_dir)]
-    song_objects = [Song(lyrics) for lyrics in lyrics_files]
+    song_objects = [Song(lyrics) for lyrics in LYRICS_FILE_PATHS]
 
     artists = {}
     for song_obj in song_objects:
         artist_name = song_obj.metadata['artist']
-        artist_output_dir = os.path.join(BASE_DIR, SCRIPT_OUTPUTS_DIR, artist_name)
+        artist_output_dir = os.path.join(SCRIPT_OUTPUTS_DIR, artist_name)
 
         if not os.path.exists(artist_output_dir):
             os.makedirs(artist_output_dir)

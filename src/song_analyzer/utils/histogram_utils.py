@@ -1,12 +1,12 @@
-import pandas as pd
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
 def generate_histogram_plot_file(ratios: list, output_path: str):
     """
     Create a file containing a histogram plot for a given list of noun/adjective ratios
-    :param ratios: list of integers representing noun/adjective ratios
-    :param output_path: path to output the PNG to
+    :param ratios: list of noun/adjective ratios
+    :param output_path: path of the output histogram PNG file
     """
     pandas_series = pd.Series(ratios)
     fig, ax = plt.subplots()

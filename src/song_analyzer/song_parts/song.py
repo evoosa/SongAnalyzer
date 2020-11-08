@@ -1,7 +1,7 @@
 import ntpath
 import os
 
-from song_analyzer.utils.file_utils import get_lyrics_from_song_file
+from song_analyzer.utils.file_utils import get_lyrics_lines_from_song_file
 from song_analyzer.song_parts.sentence import Sentence
 
 
@@ -10,7 +10,7 @@ class Song:
 
     def __init__(self, song_path: str):
         self.path = song_path
-        self.lyrics = get_lyrics_from_song_file(self.path)
+        self.lyrics = get_lyrics_lines_from_song_file(self.path)
         self.metadata = self.get_metadata()
         self.sentences = self.get_sentences()
 

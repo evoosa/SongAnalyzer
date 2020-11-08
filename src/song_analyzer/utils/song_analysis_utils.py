@@ -47,6 +47,7 @@ def get_word_pos(word: str) -> str:
     """
     get the word's part of speech
     currently, there is no support for short words, such as "we'll" or "you've"
+    :param word: word to check it's POS
     :return: the word's POS, or an empty string if it's a shortened word
     """
     if "'" not in word:
@@ -55,7 +56,7 @@ def get_word_pos(word: str) -> str:
         return ''
 
 
-def get_words_with_pos_tags(sentences, pos_tags: list) -> list:
+def get_words_with_pos_tags(sentences: list, pos_tags: list) -> list:
     """
     Get words with on of the given POS tags
     :param sentences: song's sentences
