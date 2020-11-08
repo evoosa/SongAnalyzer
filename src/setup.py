@@ -2,6 +2,7 @@ import setuptools
 
 setuptools.setup(
     name='song_analyzer',
+    packages=['song_analyzer'],
     version='1.0.0',
     install_requires=[
         'textblob==0.15.3',
