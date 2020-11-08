@@ -2,15 +2,14 @@ from song_analyzer.song_parts.song import Song
 from textblob import TextBlob
 
 
-def get_song_pos_entities(lyrics_path: str) -> dict:
+def get_pos_entities_from_sentences(sentences: list) -> dict:
     """
     Get POS entities data for a given song
-    :param lyrics_path: path to the lyrics file
+    :param sentences: song's sentences
     :return: POS entities for the song
     """
-    song_obj = Song(lyrics_path)
-    nouns = get_words_with_pos_tags(song_obj.sentences, ['NN', 'NNS', 'NNP', 'NNPS'])
-    adjectives = get_words_with_pos_tags(song_obj.sentences, ['JJ', 'JJR', 'JJS'])
+    nouns = get_words_with_pos_tags(sentences, ['NN', 'NNS', 'NNP', 'NNPS'])
+    adjectives = get_words_with_pos_tags(sentences, ['JJ', 'JJR', 'JJS'])
     noun_to_adj_ratio = len(nouns) / len(adjectives)
     return dict(
         nouns=nouns,
