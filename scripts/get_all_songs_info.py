@@ -1,11 +1,12 @@
+import csv
 import os
+
 from song_analyzer.config import BASE_DIR, LYRICS_DIR, SCRIPT_OUTPUTS_DIR, CSV_COLUMNS, HISTOGRAM_PLOT_FILENAME
 from song_analyzer.song_parts.song import Song
 from song_analyzer.utils.histogram_utils import generate_histogram_plot_file
 from song_analyzer.utils.song_analysis_utils import get_pos_entities_from_sentences, get_song_length_stats
-import csv
 
-if __name__ == '__main__':  # TODO - verbosity!!
+if __name__ == '__main__':
     lyrics_dir = os.path.join(BASE_DIR, LYRICS_DIR)
     output_dir = os.path.join(BASE_DIR, SCRIPT_OUTPUTS_DIR)
 
@@ -15,7 +16,6 @@ if __name__ == '__main__':  # TODO - verbosity!!
 
     artists = {}
     for song_obj in song_objects:
-        # Get Artist object
         artist_name = song_obj.metadata['artist']
         artist_output_dir = os.path.join(BASE_DIR, SCRIPT_OUTPUTS_DIR, artist_name)
 
@@ -55,7 +55,6 @@ if __name__ == '__main__':  # TODO - verbosity!!
             writer = csv.DictWriter(general_stats_file, fieldnames=CSV_COLUMNS)
             writer.writerow(len_stats)
 
-    # Create POS diagram for all artists
     print('\n[[ Create POS histograms for all artists ]]')
     for artist in artists.values():
         noun_to_adj_ratios = []

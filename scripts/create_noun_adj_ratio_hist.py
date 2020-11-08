@@ -1,9 +1,10 @@
+import os
+from datetime import datetime
+
+from song_analyzer.config import BASE_DIR, LYRICS_DIR, SCRIPT_OUTPUTS_DIR, HISTOGRAM_PLOT_FILENAME
+from song_analyzer.song_parts.song import Song
 from song_analyzer.utils.histogram_utils import generate_histogram_plot_file
 from song_analyzer.utils.song_analysis_utils import get_pos_entities_from_sentences
-from song_analyzer.song_parts.song import Song
-import os
-from song_analyzer.config import BASE_DIR, LYRICS_DIR, SCRIPT_OUTPUTS_DIR, HISTOGRAM_PLOT_FILENAME
-from datetime import datetime
 
 if __name__ == '__main__':
     lyrics_dir = os.path.join(BASE_DIR, LYRICS_DIR)

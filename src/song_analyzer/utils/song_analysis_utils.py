@@ -23,10 +23,6 @@ def get_song_length_stats(sentences: list) -> dict[str, int]:
     :param sentences: list of sentences
     :return: length stats for the song
     """
-    """
-    ::
-    :return: sentences statistics
-    """
     sentences_lengths = [len(sentence.words) for sentence in sentences]
     sen_max_len = max(sentences_lengths)
     sen_min_len = min(sentences_lengths)
