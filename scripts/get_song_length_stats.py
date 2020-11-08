@@ -1,11 +1,13 @@
 import sys
-from song_analyzer.utils.song_analysis_utils import get_song_length_stats
+
+from song_analyzer.config import GEN_STATS_FILENAME
 from song_analyzer.song_parts.song import Song
+from song_analyzer.utils.file_utils import create_gen_stats_csv, update_gen_stats_file, print_file
 
 if __name__ == '__main__':
     lyrics_path = sys.argv[1]
     song_obj = Song(lyrics_path)
-    len_stats = get_song_length_stats(song_obj.sentences)
-
-    print('\n[ LENGTH STATS ]\n')
-    [print('{0}: {1}'.format(stat[0], stat[1])) for stat in len_stats.items()]
+    output_file = song_obj.metadata['name'] + '_' + GEN_STATS_FILENAME
+    create_gen_stats_csv(output_file)
+    update_gen_stats_file(output_file, song_obj)
+    print_file(output_file)

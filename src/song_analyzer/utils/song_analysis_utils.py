@@ -17,9 +17,9 @@ def get_pos_entities_from_sentences(sentences: list) -> dict:
     )
 
 
-def get_song_length_stats(sentences: list) -> dict:
+def get_sentence_length_stats(sentences: list) -> dict:
     """
-    Get statistics about the min/max/average length of the sentences and words in the song
+    Get statistics about the min/max/average length of the given sentences
     :param sentences: list of sentences
     :return: length stats for the song
     """
@@ -27,7 +27,17 @@ def get_song_length_stats(sentences: list) -> dict:
     sen_max_len = max(sentences_lengths)
     sen_min_len = min(sentences_lengths)
     sen_average_len = sum(sentences_lengths) / len(sentences_lengths)
+    return dict(sentence_max_len=sen_max_len,
+                sentence_min_len=sen_min_len,
+                sentence_average_len=sen_average_len)
 
+
+def get_word_length_stats(sentences: list) -> dict:
+    """
+    Get statistics about the min/max/average length of the words in the given sentences
+    :param sentences: list of sentences
+    :return: length stats for the song
+    """
     words_lengths = []
     for sentence in sentences:
         for word in sentence.words:
@@ -35,12 +45,20 @@ def get_song_length_stats(sentences: list) -> dict:
     word_max_len = max(words_lengths)
     word_min_len = min(words_lengths)
     word_average_len = sum(words_lengths) / len(words_lengths)
-    return dict(sentence_max_len=sen_max_len,
-                sentence_min_len=sen_min_len,
-                sentence_average_len=sen_average_len,
-                word_max_len=word_max_len,
+    return dict(word_max_len=word_max_len,
                 word_min_len=word_min_len,
                 word_average_len=word_average_len)
+
+
+def get_song_length_stats(sentences: list) -> dict:
+    """
+    Get statistics about the min/max/average length of the sentences and words in the song
+    :param sentences: list of sentences
+    :return: length stats for the song
+    """
+    word_len_stats = get_word_length_stats(sentences)
+    sent_len_stats = get_sentence_length_stats(sentences)
+    return {**word_len_stats, **sent_len_stats}
 
 
 def get_word_pos(word: str) -> str:
@@ -58,7 +76,7 @@ def get_word_pos(word: str) -> str:
 
 def get_words_with_pos_tags(sentences: list, pos_tags: list) -> list:
     """
-    Get words with on of the given POS tags
+    Get words with of the given POS tags
     :param sentences: song's sentences
     :param pos_tags: POS tags to search songs with
     :return:

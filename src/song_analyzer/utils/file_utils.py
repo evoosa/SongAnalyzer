@@ -5,6 +5,15 @@ from song_analyzer.config import CSV_COLUMNS
 from song_analyzer.utils.song_analysis_utils import get_pos_entities_from_sentences, get_song_length_stats
 
 
+def print_file(file_path):
+    """
+    print the file's contents
+    :param file_path: path to the file
+    """
+    with open(file_path, 'r') as opened_file:
+        print(opened_file.read())
+
+
 def create_dir_if_missing(dir_path: str):
     """
     Create directory path if doesn't exist
@@ -53,7 +62,7 @@ def update_pos_stats_file(file_path: str, song_obj):
                                                                           pos_entities['noun_to_adjective_ratio']))
 
 
-def update_general_stats_file(file_path: str, song_obj):
+def update_gen_stats_file(file_path: str, song_obj):
     """
     Update general statistics file with word/sentence length stats
     :param file_path: path to the post statistics file
