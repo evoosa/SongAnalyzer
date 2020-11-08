@@ -4,8 +4,7 @@ from song_analyzer.config import SCRIPT_OUTPUTS_DIR, HISTOGRAM_PLOT_FILENAME, LY
 from song_analyzer.song_parts.song import Song
 from song_analyzer.utils.file_utils import create_dir_if_missing, create_gen_stats_csv, update_pos_stats_file, \
     update_general_stats_file
-from song_analyzer.utils.histogram_utils import generate_histogram_plot_file
-from song_analyzer.utils.song_analysis_utils import get_pos_entities_from_sentences
+from song_analyzer.utils.histogram_utils import gen_hist_plot_from_songs
 
 if __name__ == '__main__':
 
@@ -38,10 +37,5 @@ if __name__ == '__main__':
 
     print('\n[[ Create POS histograms for all artists ]]')
     for artist in artists.values():
-        noun_to_adj_ratios = []
-        output_file_path = os.path.join(artist['output_dir'], HISTOGRAM_PLOT_FILENAME)
-        for song_obj in artist['songs']:
-            song_pos_entities = get_pos_entities_from_sentences(song_obj.sentences)
-            noun_to_adj_ratios.append(song_pos_entities['noun_to_adjective_ratio'])
-        generate_histogram_plot_file(noun_to_adj_ratios, output_file_path)
+        gen_hist_plot_from_songs(os.path.join(artist['output_dir'], HISTOGRAM_PLOT_FILENAME), artist['songs'])
     print('[[ DONE ]]')
