@@ -1,6 +1,6 @@
 import os
 
-BASE_DIR = r"C:\Users\User\Desktop\PS\SongAnalyzer"
+BASE_DIR = r"/opt/song_analyzer"
 LYRICS_DIR = os.path.join(BASE_DIR, 'lyrics')
 LYRICS_FILE_PATHS = [os.path.join(LYRICS_DIR, path) for path in os.listdir(LYRICS_DIR)]
 SCRIPT_OUTPUTS_DIR = os.path.join(BASE_DIR, 'script_outputs')

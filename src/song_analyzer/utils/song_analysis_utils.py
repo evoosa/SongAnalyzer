@@ -1,4 +1,5 @@
-import nltk
+from textblob import TextBlob
+
 
 def get_pos_entities_from_sentences(sentences: list) -> dict:
     """
@@ -16,7 +17,7 @@ def get_pos_entities_from_sentences(sentences: list) -> dict:
     )
 
 
-def get_song_length_stats(sentences: list) -> dict[str, int]:
+def get_song_length_stats(sentences: list) -> dict:
     """
     Get statistics about the min/max/average length of the sentences and words in the song
     :param sentences: list of sentences
@@ -50,7 +51,7 @@ def get_word_pos(word: str) -> str:
     :return: the word's POS, or an empty string if it's a shortened word
     """
     if "'" not in word:
-        return nltk.pos_tag(nltk.word_tokenize(word))[0][1]
+        return TextBlob(word).tags[0][1]
     else:
         return ''
 

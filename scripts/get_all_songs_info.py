@@ -3,6 +3,7 @@ import os
 
 from song_analyzer.config import SCRIPT_OUTPUTS_DIR, CSV_COLUMNS, HISTOGRAM_PLOT_FILENAME, LYRICS_FILE_PATHS
 from song_analyzer.song_parts.song import Song
+from song_analyzer.utils.file_utils import create_dir_if_missing
 from song_analyzer.utils.histogram_utils import generate_histogram_plot_file
 from song_analyzer.utils.song_analysis_utils import get_pos_entities_from_sentences, get_song_length_stats
 
@@ -15,9 +16,7 @@ if __name__ == '__main__':
     for song_obj in song_objects:
         artist_name = song_obj.metadata['artist']
         artist_output_dir = os.path.join(SCRIPT_OUTPUTS_DIR, artist_name)
-
-        if not os.path.exists(artist_output_dir):
-            os.makedirs(artist_output_dir)
+        create_dir_if_missing(artist_output_dir)
 
         if artist_name not in artists.keys():
             artists[artist_name] = {
@@ -39,9 +38,9 @@ if __name__ == '__main__':
             pos_entities = get_pos_entities_from_sentences(song_obj.sentences)
             pos_file.write('\n-- {} --\n'.format(song_obj.metadata['name']))
             pos_file.write('\n[ NOUNS ]\n')
-            map(lambda noun: pos_file.write(noun + '\n'), set(pos_entities['nouns']))
+            [pos_file.write(noun + '\n') for noun in set(pos_entities['nouns'])]
             pos_file.write('\n[ ADJECTIVES ]\n')
-            map(lambda adjective: pos_file.write(adjective + '\n'), set(pos_entities['adjectives']))
+            [pos_file.write(adjective + '\n') for adjective in set(pos_entities['adjectives'])]
             pos_file.write('\nnoun/adjective ratio: {0} / {1} = {2}\n'.format(len(pos_entities['nouns']),
                                                                               len(pos_entities['adjectives']),
                                                                               pos_entities['noun_to_adjective_ratio']))

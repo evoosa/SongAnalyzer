@@ -24,7 +24,7 @@ class Song:
         filename_splitted = filename.split('-')
         return dict(name=filename_splitted[1], artist=filename_splitted[0])
 
-    def get_sentences(self) -> list[Sentence]:
+    def get_sentences(self) -> list:
         """
         Get the song's 'Sentence' objects
         Remove ',' character from words
