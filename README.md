@@ -24,6 +24,7 @@
 # Requirements
     - python 3.9
     - Windows or Linux environment
+    -
 
 # Installation
     - cd to src/
@@ -33,3 +34,6 @@
 
 # Usage
     - python3.9 get_song_length_stats.py <lyrics_file_path>
+    - python3.9 get_song_pos_entities.py <lyrics_file_path>
+    - python3.9 generate_noun_adj_ratio_hist.py
+    - python3.9 get_all_songs_info.py
