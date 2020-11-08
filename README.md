@@ -1,10 +1,15 @@
 # SongAnalyzer
 * The SongAnalyzer package provides you scripts for analyzing song lyrics
 
-# Important Directories
-    - The lyrics are located in the 'lyrics' directory.
-    - The scripts are located in the 'scripts' directory.
-    - The scripts output to a directory called 'song_analyzer/script_outputs' - They'll create it if it's missing
+# Installation
+    - python3 setup.py develop
+    OR
+    - pip3 install song_analyzer/src/
+
+# Requirements
+    - python 3.7.9
+    - Linux environment
+    - run: python3 -m textblob.download_corpora
 
 # Scripts
     * get_song_length_stats.py <lyrics_file_path>
@@ -22,21 +27,16 @@
         - a CSV file containing stats of the word and sentence length for each song.
         - a TXT file containing Part Of Speech data for each song (nouns, adjectives, noun/adjective ratio).
 
-# Requirements
-    - python 3.7.9
-    - Linux environment
-    - run: python3 -m textblob.download_corpora
-
-# Installation
-    - python3 setup.py develop
-    OR
-    - pip3 install song_analyzer/src/
-
 # Usage
     ./get_song_length_stats.py <lyrics_file_path>
     ./get_song_pos_entities.py <lyrics_file_path>
     ./generate_noun_adj_ratio_hist.py
     ./get_all_songs_info.py
+
+# Important Directories
+    - The lyrics are located in the 'lyrics' directory.
+    - The scripts are located in the 'scripts' directory.
+    - The scripts output to a directory called 'song_analyzer/script_outputs' - They'll create it if it's missing
 
 # What i wish i had the time to address
     - logging
